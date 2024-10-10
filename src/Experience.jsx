@@ -2,6 +2,7 @@ import { useFrame } from '@react-three/fiber'
 import {
     AccumulativeShadows,
     BakeShadows,
+    ContactShadows,
     OrbitControls,
     RandomizedLight,
     SoftShadows,
@@ -16,14 +17,14 @@ export default function Experience() {
 
     //come aggiungere un helper
     const directionalLight = useRef()
-    // useHelper(directionalLight, THREE.DirectionalLightHelper, 1)
+    useHelper(directionalLight, THREE.DirectionalLightHelper, 1)
 
     const cube = useRef()
 
     useFrame((state, delta) => {
-        const time = state.clock.elapsedTime
+        // const time = state.clock.elapsedTime
 
-        cube.current.position.x = 2 + Math.sin(time)
+        // cube.current.position.x = 2 + Math.sin(time)
         cube.current.rotation.y += delta * 0.2
     })
 
@@ -45,7 +46,7 @@ export default function Experience() {
 
         {/* Import AccumulativeShadows dal drei library */}
         {/* AccumulativeSadows non è indicato ai oggetti animati */}
-        <AccumulativeShadows
+        {/* <AccumulativeShadows
             position-y={-0.99}
             scale={10}
             color='#316d39'
@@ -63,7 +64,15 @@ export default function Experience() {
                 bias={0.001}
             />
 
-        </AccumulativeShadows>
+        </AccumulativeShadows> */}
+
+        {/* Import ContactShadows dal drei library */}
+        <ContactShadows
+            position={[0, -0.99, 0]} //move it right above the floor
+            scale={10}
+            resolution={512}
+            far={5}
+        />
 
         <directionalLight
             ref={directionalLight}

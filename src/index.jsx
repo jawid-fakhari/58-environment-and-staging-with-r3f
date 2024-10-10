@@ -2,7 +2,7 @@ import './style.css'
 import ReactDOM from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
-import * as THREE from 'three'
+// import * as THREE from 'three'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 /**
@@ -14,6 +14,7 @@ const root = ReactDOM.createRoot(document.querySelector('#root'))
 // const created = ({ gl }) => {//possiamo fare destructuring
 //     gl.setClearColor('#ffa0ff', 1)
 // }
+
 // const created = ({ scene }) => {
 //     scene.background = new THREE.Color('red')
 // }
@@ -28,6 +29,8 @@ root.render(
         }}
     // onCreated={created} //dp creazione canvas chiama created
     >
+        {/* cambiare il colore con r3f */}
+        {/* <color args={['purple']} attach="background" /> */}
         <Experience />
     </Canvas>
 )

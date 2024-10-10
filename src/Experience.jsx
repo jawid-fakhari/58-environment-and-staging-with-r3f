@@ -2,6 +2,7 @@ import { useFrame } from '@react-three/fiber'
 import {
     BakeShadows,
     OrbitControls,
+    SoftShadows,
     useHelper
 } from '@react-three/drei'
 import { useRef } from 'react'
@@ -15,7 +16,6 @@ export default function Experience() {
     const directionalLight = useRef()
     useHelper(directionalLight, THREE.DirectionalLightHelper, 1)
 
-
     const cube = useRef()
 
     useFrame((state, delta) => {
@@ -24,7 +24,12 @@ export default function Experience() {
 
     return <>
         {/* Import BakingShadows dal drei libray */}
-        <BakeShadows />{/* non usarlo sul oggetto che si muove */}
+        {/*<BakeShadows />*/}{/* non usarlo sul oggetto che si muove */}
+
+        {/* Import SoftShadows dal drei library */}
+        <SoftShadows size={25} samples={10} focus={0} />{/* una volta trovato i valori giusti non toccare più perché SoftShadows coincide molto sul performance*/}
+
+
         {/* cambiare il colore con r3f */}{/*puo essere messo ovunque finché il parente è 'scene' */}
         <color args={['#aaafff']} attach="background" />
 

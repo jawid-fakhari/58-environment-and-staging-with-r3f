@@ -1,9 +1,16 @@
 import { useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, useHelper } from '@react-three/drei'
 import { useRef } from 'react'
 import { Perf } from 'r3f-perf'
+import * as THREE from 'three'
 
 export default function Experience() {
+
+    //come aggiungere un helper
+    const directionalLight = useRef()
+    useHelper(directionalLight, THREE.DirectionalLightHelper, 1)
+
+
     const cube = useRef()
 
     useFrame((state, delta) => {
@@ -12,13 +19,13 @@ export default function Experience() {
 
     return <>
         {/* cambiare il colore con r3f */}{/*puo essere messo ovunque finché il parente è 'scene' */}
-        <color args={['purple']} attach="background" />
+        <color args={['#aaafff']} attach="background" />
 
         <Perf position="top-left" />
 
         <OrbitControls makeDefault />
 
-        <directionalLight position={[1, 2, 3]} intensity={4.5} />
+        <directionalLight ref={directionalLight} position={[1, 2, 3]} intensity={4.5} />
         <ambientLight intensity={1.5} />
 
         <mesh position-x={- 2}>

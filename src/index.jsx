@@ -4,15 +4,25 @@ import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
+/**
+ * func created, state: ci da lo stato del canvas
+ */
+// const created = (state) => {
+//     state.gl.setClearColor('#ffeeff')
+// }
+const created = ({ gl }) => {//possiamo fare destructuring
+    gl.setClearColor('#ffa0ff', 1)
+}
 
 root.render(
     <Canvas
-        camera={ {
+        camera={{
             fov: 45,
             near: 0.1,
             far: 200,
-            position: [ - 4, 3, 6 ]
-        } }
+            position: [- 4, 3, 6]
+        }}
+        onCreated={created} //dp creazione canvas chiama created
     >
         <Experience />
     </Canvas>

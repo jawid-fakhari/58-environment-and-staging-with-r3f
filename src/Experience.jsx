@@ -1,8 +1,13 @@
 import { useFrame } from '@react-three/fiber'
-import { OrbitControls, useHelper } from '@react-three/drei'
+import {
+    BakeShadows,
+    OrbitControls,
+    useHelper
+} from '@react-three/drei'
 import { useRef } from 'react'
 import { Perf } from 'r3f-perf'
 import * as THREE from 'three'
+
 
 export default function Experience() {
 
@@ -18,6 +23,8 @@ export default function Experience() {
     })
 
     return <>
+        {/* Import BakingShadows dal drei libray */}
+        <BakeShadows />{/* non usarlo sul oggetto che si muove */}
         {/* cambiare il colore con r3f */}{/*puo essere messo ovunque finché il parente è 'scene' */}
         <color args={['#aaafff']} attach="background" />
 

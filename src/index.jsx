@@ -21,6 +21,7 @@ const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 root.render(
     <Canvas
+        shadows //attivare shadows in r3f, poi dobbiamo fare il cast al shadows alla luce e ai oggetti
         camera={{
             fov: 45,
             near: 0.1,

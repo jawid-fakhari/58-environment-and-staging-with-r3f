@@ -1,8 +1,8 @@
 import * as THREE from 'three'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Perf } from 'r3f-perf'
 import { useControls } from 'leva'
-import { render, useFrame } from '@react-three/fiber'
+import { render, useFrame, useThree } from '@react-three/fiber'
 
 import {
     AccumulativeShadows,
@@ -12,7 +12,8 @@ import {
     RandomizedLight,
     Sky,
     SoftShadows,
-    useHelper
+    useHelper,
+    Environment
 } from '@react-three/drei'
 
 
@@ -35,17 +36,8 @@ export default function Experience() {
 
     const { color, opacity, blur } = useControls('contact shadows', {
         color: '#000000',
-        opacity: {
-            value: 0.5,
-            min: 0,
-            max: 1,
-        },
-        blur:
-        {
-            value: 1,
-            min: 0,
-            max: 10,
-        },
+        opacity: { value: 0.5, min: 0, max: 1 },
+        blur: { value: 1, min: 0, max: 10 },
     })
 
     const { subPosition } = useControls('sky', {
@@ -53,9 +45,32 @@ export default function Experience() {
         subPosition: { value: [1, 2, 3] }
     })
 
+    const { envMapIntensity } = useControls('environment map', {
+        envMapIntensity: { value: 1, min: 0, max: 12 }
+    })
+
+    const scene = useThree(state => state.scene)
+    useEffect(() => {
+        scene.environmentIntensity = envMapIntensity
+    }, [envMapIntensity])
+
     return <>
+        {/* Import Environment map from drei*/}
+        <Environment
+            files={
+                ['./environmentMaps/2/px.jpg',
+                    './environmentMaps/2/nx.jpg',
+                    './environmentMaps/2/py.jpg',
+                    './environmentMaps/2/ny.jpg',
+                    './environmentMaps/2/pz.jpg',
+                    './environmentMaps/2/nz.jpg',
+                ]
+            }
+        />
+
         {/*Import Sky from Drei */}
-        <Sky sunPosition={subPosition} />
+        {/* <Sky sunPosition={subPosition} /> */}
+
         {/* Import BakingShadows dal drei libray */}
         {/*<BakeShadows />*/}{/* non usarlo sul oggetto che si muove */}
 
@@ -105,7 +120,7 @@ export default function Experience() {
         //frames={1} //cosi posso bake shadow "non sui ogg. in animazione!"
         />
 
-        <directionalLight
+        {/* <directionalLight
             ref={directionalLight}
             castShadow
             position={subPosition} //mettendo sunPosition facciamo shadow realistico
@@ -119,7 +134,7 @@ export default function Experience() {
             shadow-camera-bottom={-5}
             shadow-camera-left={-5}
         />
-        <ambientLight intensity={1.5} />
+        <ambientLight intensity={1.5} /> */}
 
         <mesh castShadow position-x={- 2}>
             <sphereGeometry />

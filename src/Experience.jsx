@@ -171,7 +171,16 @@ export default function Experience() {
         </mesh> */}
 
         {/* import Stage drei, stage ci da la possibilità di renderizzare al volo  */}
-        <Stage>
+        <Stage
+            shadows={{
+                type: 'contact',
+                opacity: 0.2,
+                blur: 3
+            }}
+            environment="sunset"
+            preset="portrait"
+            intensity={envMapIntensity}
+        >
             <mesh castShadow position-y={1} position-x={- 2}>
                 <sphereGeometry />
                 <meshStandardMaterial color="orange" envMapIntensity={envMapIntensity} />

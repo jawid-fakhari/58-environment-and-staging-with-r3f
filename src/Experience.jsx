@@ -58,21 +58,29 @@ export default function Experience() {
     return <>
         {/* Import Environment map from drei*/}
         <Environment
-            background
-        //HDR texture**
-        // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
-        //**Presets di drei che troviamo in github */
-        // preset='sunset'
+            // background
+            //HDR texture**
+            // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
+            //**Presets di drei che troviamo in github */
+            preset="sunset"
+            //ground crea una globo del environment con un piano di appoggio come il pavimento, posizione y del contactShadows va sul 0 e la poszione di oggetti in base alla necessità su o giu
+            ground={{
+                height: 7,
+                radius: 28,
+                scale: 100
+            }}
+
+        //resolution={32} //se non abbaiamo un environment background image, mettiamo un small resolution per migliorare il performance 
         >
             {/* Creare un custom enironment map, aggiungendo cio che voglio all'interno del Environment tag */}
-            <color args={['#000000']} attach="background" />
+            {/* <color args={['#000000']} attach="background" /> */}
 
             {/* <mesh position-z={-5} scale={10}>
                 <planeGeometry />
                 <meshBasicMaterial color='red' />
             </mesh> */}
             {/* creare light usando mesh ⬆️ non è indicato, drei ci da Lightformer */}
-            <Lightformer position-z={-5} scale={10} color="red" intensity={10} />
+            {/* <Lightformer position-z={-5} scale={10} color="red" intensity={10} form="ring" /> */}
         </Environment>
 
         {/*Import Sky from Drei */}
@@ -117,7 +125,7 @@ export default function Experience() {
 
         {/* Import ContactShadows dal drei library */}
         <ContactShadows
-            position={[0, -0.99, 0]} //move it right above the floor
+            position={[0, 0, 0]} //move it right above the floor
             scale={10}
             resolution={512}
             far={5}
@@ -143,20 +151,20 @@ export default function Experience() {
         />
         <ambientLight intensity={1.5} /> */}
 
-        <mesh castShadow position-x={- 2}>
+        <mesh castShadow position-y={1} position-x={- 2}>
             <sphereGeometry />
             <meshStandardMaterial color="orange" />
         </mesh>
 
-        <mesh castShadow ref={cube} position-x={2} scale={1.5}>
+        <mesh castShadow position-y={1} ref={cube} position-x={2} scale={1.5}>
             <boxGeometry />
             <meshStandardMaterial color='mediumpurple' />
         </mesh>
 
-        <mesh position-y={- 1} rotation-x={- Math.PI * 0.5} scale={10}>
+        {/* <mesh position-y={0} rotation-x={- Math.PI * 0.5} scale={10}>
             <planeGeometry />
             <meshStandardMaterial color="greenyellow" />
-        </mesh>
+        </mesh> */}
 
     </>
 }

@@ -57,15 +57,15 @@ export default function Experience() {
     return <>
         {/* Import Environment map from drei*/}
         <Environment
-            files={
-                ['./environmentMaps/2/px.jpg',
-                    './environmentMaps/2/nx.jpg',
-                    './environmentMaps/2/py.jpg',
-                    './environmentMaps/2/ny.jpg',
-                    './environmentMaps/2/pz.jpg',
-                    './environmentMaps/2/nz.jpg',
-                ]
-            }
+            background
+            files={[
+                './environmentMaps/2/px.jpg',
+                './environmentMaps/2/nx.jpg',
+                './environmentMaps/2/py.jpg',
+                './environmentMaps/2/ny.jpg',
+                './environmentMaps/2/pz.jpg',
+                './environmentMaps/2/nz.jpg',
+            ]}
         />
 
         {/*Import Sky from Drei */}

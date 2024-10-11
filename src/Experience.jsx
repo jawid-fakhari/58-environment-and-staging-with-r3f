@@ -58,8 +58,10 @@ export default function Experience() {
         {/* Import Environment map from drei*/}
         <Environment
             background
-            //HDR texture
-            files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
+            //HDR texture**
+            // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
+            //**Presets di drei che troviamo in github */
+            preset='sunset'
         />
 
         {/*Import Sky from Drei */}

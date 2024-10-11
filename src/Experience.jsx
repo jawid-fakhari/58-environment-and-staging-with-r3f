@@ -10,6 +10,7 @@ import {
     ContactShadows,
     OrbitControls,
     RandomizedLight,
+    Sky,
     SoftShadows,
     useHelper
 } from '@react-three/drei'
@@ -47,7 +48,14 @@ export default function Experience() {
         },
     })
 
+    const { subPosition } = useControls('sky', {
+        //in sunPosition usiamo spherical coordinates, ma qui non abbiamo usato!
+        subPosition: { value: [1, 2, 3] }
+    })
+
     return <>
+        {/*Import Sky from Drei */}
+        <Sky sunPosition={subPosition} />
         {/* Import BakingShadows dal drei libray */}
         {/*<BakeShadows />*/}{/* non usarlo sul oggetto che si muove */}
 
@@ -57,7 +65,7 @@ export default function Experience() {
 
 
         {/* cambiare il colore con r3f */}{/*puo essere messo ovunque finché il parente è 'scene' */}
-        <color args={['#aaafff']} attach="background" />
+        <color args={['ivory']} attach="background" />
 
         <Perf position="top-left" />
 
@@ -94,12 +102,13 @@ export default function Experience() {
             color={color}
             opacity={opacity}
             blur={blur}
+        //frames={1} //cosi posso bake shadow "non sui ogg. in animazione!"
         />
 
         <directionalLight
             ref={directionalLight}
             castShadow
-            position={[1, 2, 3]}
+            position={subPosition} //mettendo sunPosition facciamo shadow realistico
             intensity={4.5}
             //configurazione shadow in r3f
             shadow-mapSize={[1024, 1024]}

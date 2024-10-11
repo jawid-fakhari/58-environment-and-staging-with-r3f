@@ -14,7 +14,8 @@ import {
     SoftShadows,
     useHelper,
     Environment,
-    Lightformer
+    Lightformer,
+    Stage
 } from '@react-three/drei'
 
 
@@ -50,8 +51,7 @@ export default function Experience() {
         envMapIntensity: { value: 1, min: 0, max: 12 },
         envMapHeight: { value: 2, min: 0, max: 100 },
         envMapRadius: { value: 20, min: 10, max: 1000 },
-        envMapScale: { value: 20, min: 10, max: 1000 },
-
+        envMapScale: { value: 20, min: 10, max: 1000 }
     })
 
     const scene = useThree(state => state.scene)
@@ -61,31 +61,31 @@ export default function Experience() {
 
     return <>
         {/* Import Environment map from drei*/}
-        <Environment
+        {/* <Environment 
             // background
             //HDR texture**
             // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
             //**Presets di drei che troviamo in github */
-            preset="sunset"
-            //ground crea una globo del environment con un piano di appoggio come il pavimento, posizione y del contactShadows va sul 0 e la poszione di oggetti in base alla necessità su o giu
-            ground={{
-                height: envMapHeight,
-                radius: envMapRadius,
-                scale: envMapScale
-            }}
+            // preset="sunset"
+            // //ground crea una globo del environment con un piano di appoggio come il pavimento, posizione y del contactShadows va sul 0 e la poszione di oggetti in base alla necessità su o giu
+            //resolution={32} //se non abbaiamo un environment background image, mettiamo un small resolution per migliorare il performance 
+            // ground={{
+            //     height: envMapHeight,
+            //     radius: envMapRadius,
+            //     scale: envMapScale
+            // }}>
 
-        //resolution={32} //se non abbaiamo un environment background image, mettiamo un small resolution per migliorare il performance 
-        >
-            {/* Creare un custom enironment map, aggiungendo cio che voglio all'interno del Environment tag */}
-            {/* <color args={['#000000']} attach="background" /> */}
+        /*}
+            {/* Creare un custom enironment map, aggiungendo cio che voglio all'interno del Environment tag */ }
+        {/* <color args={['#000000']} attach="background" /> */}
 
-            {/* <mesh position-z={-5} scale={10}>
+        {/* <mesh position-z={-5} scale={10}>
                 <planeGeometry />
                 <meshBasicMaterial color='red' />
             </mesh> */}
-            {/* creare light usando mesh ⬆️ non è indicato, drei ci da Lightformer */}
-            {/* <Lightformer position-z={-5} scale={10} color="red" intensity={10} form="ring" /> */}
-        </Environment>
+        {/* creare light usando mesh ⬆️ non è indicato, drei ci da Lightformer */}
+        {/* <Lightformer position-z={-5} scale={10} color="red" intensity={10} form="ring" /> */}
+        {/* </Environment> */}
 
         {/*Import Sky from Drei */}
         {/* <Sky sunPosition={subPosition} /> */}
@@ -99,7 +99,7 @@ export default function Experience() {
 
 
         {/* cambiare il colore con r3f */}{/*puo essere messo ovunque finché il parente è 'scene' */}
-        <color args={['ivory']} attach="background" />
+        {/* <color args={['ivory']} attach="background" /> */}
 
         <Perf position="top-left" />
 
@@ -128,7 +128,7 @@ export default function Experience() {
         </AccumulativeShadows> */}
 
         {/* Import ContactShadows dal drei library */}
-        <ContactShadows
+        {/* <ContactShadows
             position={[0, 0, 0]} //move it right above the floor
             scale={10}
             resolution={512}
@@ -137,7 +137,7 @@ export default function Experience() {
             opacity={opacity}
             blur={blur}
         //frames={1} //cosi posso bake shadow "non sui ogg. in animazione!"
-        />
+        /> */}
 
         {/* <directionalLight
             ref={directionalLight}
@@ -155,20 +155,33 @@ export default function Experience() {
         />
         <ambientLight intensity={1.5} /> */}
 
-        <mesh castShadow position-y={1} position-x={- 2}>
+        {/* <mesh castShadow position-y={1} position-x={- 2}>
             <sphereGeometry />
-            <meshStandardMaterial color="orange" />
+            <meshStandardMaterial color="orange" envMapIntensity={envMapIntensity}/>
         </mesh>
 
         <mesh castShadow position-y={1} ref={cube} position-x={2} scale={1.5}>
             <boxGeometry />
-            <meshStandardMaterial color='mediumpurple' />
-        </mesh>
+            <meshStandardMaterial color='mediumpurple' envMapIntensity={envMapIntensity}/>
+        </mesh> */}
 
         {/* <mesh position-y={0} rotation-x={- Math.PI * 0.5} scale={10}>
             <planeGeometry />
             <meshStandardMaterial color="greenyellow" />
         </mesh> */}
+
+        {/* import Stage drei, stage ci da la possibilità di renderizzare al volo  */}
+        <Stage>
+            <mesh castShadow position-y={1} position-x={- 2}>
+                <sphereGeometry />
+                <meshStandardMaterial color="orange" envMapIntensity={envMapIntensity} />
+            </mesh>
+
+            <mesh castShadow position-y={1} ref={cube} position-x={2} scale={1.5}>
+                <boxGeometry />
+                <meshStandardMaterial color='mediumpurple' envMapIntensity={envMapIntensity} />
+            </mesh>
+        </Stage>
 
     </>
 }

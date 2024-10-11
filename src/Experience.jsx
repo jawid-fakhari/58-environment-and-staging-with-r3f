@@ -58,11 +58,19 @@ export default function Experience() {
         {/* Import Environment map from drei*/}
         <Environment
             background
-            //HDR texture**
-            // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
-            //**Presets di drei che troviamo in github */
-            preset='sunset'
-        />
+        //HDR texture**
+        // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
+        //**Presets di drei che troviamo in github */
+        // preset='sunset'
+        >
+            {/* Creare un custom enironment map, aggiungendo cio che voglio all'interno del Environment tag */}
+            <color args={['#000000']} attach="background" />
+
+            <mesh position-z={-5} scale={10}>
+                <planeGeometry />
+                <meshBasicMaterial color='red' />
+            </mesh>
+        </Environment>
 
         {/*Import Sky from Drei */}
         {/* <Sky sunPosition={subPosition} /> */}

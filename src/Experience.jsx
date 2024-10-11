@@ -13,7 +13,8 @@ import {
     Sky,
     SoftShadows,
     useHelper,
-    Environment
+    Environment,
+    Lightformer
 } from '@react-three/drei'
 
 
@@ -66,10 +67,12 @@ export default function Experience() {
             {/* Creare un custom enironment map, aggiungendo cio che voglio all'interno del Environment tag */}
             <color args={['#000000']} attach="background" />
 
-            <mesh position-z={-5} scale={10}>
+            {/* <mesh position-z={-5} scale={10}>
                 <planeGeometry />
                 <meshBasicMaterial color='red' />
-            </mesh>
+            </mesh> */}
+            {/* creare light usando mesh ⬆️ non è indicato, drei ci da Lightformer */}
+            <Lightformer position-z={-5} scale={10} color="red" intensity={10} />
         </Environment>
 
         {/*Import Sky from Drei */}

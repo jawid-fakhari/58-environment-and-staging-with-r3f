@@ -46,8 +46,12 @@ export default function Experience() {
         subPosition: { value: [1, 2, 3] }
     })
 
-    const { envMapIntensity } = useControls('environment map', {
-        envMapIntensity: { value: 1, min: 0, max: 12 }
+    const { envMapIntensity, envMapHeight, envMapRadius, envMapScale } = useControls('environment map', {
+        envMapIntensity: { value: 1, min: 0, max: 12 },
+        envMapHeight: { value: 2, min: 0, max: 100 },
+        envMapRadius: { value: 20, min: 10, max: 1000 },
+        envMapScale: { value: 20, min: 10, max: 1000 },
+
     })
 
     const scene = useThree(state => state.scene)
@@ -65,9 +69,9 @@ export default function Experience() {
             preset="sunset"
             //ground crea una globo del environment con un piano di appoggio come il pavimento, posizione y del contactShadows va sul 0 e la poszione di oggetti in base alla necessità su o giu
             ground={{
-                height: 7,
-                radius: 28,
-                scale: 100
+                height: envMapHeight,
+                radius: envMapRadius,
+                scale: envMapScale
             }}
 
         //resolution={32} //se non abbaiamo un environment background image, mettiamo un small resolution per migliorare il performance 
